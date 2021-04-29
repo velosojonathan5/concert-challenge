@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Device } from 'src/entities/device.entity';
+import { Device } from '../entities/device.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -12,6 +12,12 @@ export class WeatherService {
 
   async findWeather(measurementDate: Date) {
     const queryDate = measurementDate.toISOString().split('T')[0];
-    return this.deviceRepository.findOne({ where: { date: queryDate } });
+    const deviceData = await this.deviceRepository.findOne({
+      where: { date: queryDate },
+    });
+    if (!deviceData) {
+      throw new NotFoundException('There are no data for that day');
+    }
+    return deviceData;
   }
 }
