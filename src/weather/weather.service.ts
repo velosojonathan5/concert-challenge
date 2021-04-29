@@ -16,7 +16,7 @@ export class WeatherService {
       where: { date: queryDate },
     });
     if (!deviceData) {
-      throw new NotFoundException('There are no data for that day');
+      throw new NotFoundException('There are no data');
     }
     return deviceData;
   }

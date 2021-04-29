@@ -14,7 +14,7 @@ export class DeviceDto extends Device {
   @ApiProperty()
   humidity: number;
 
-  @ApiProperty({ name: 'wind_speed' })
+  @ApiProperty()
   windSpeed: number;
 
   @ApiProperty()

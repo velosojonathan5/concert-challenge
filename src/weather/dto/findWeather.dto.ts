@@ -4,7 +4,7 @@ import { IsDate } from 'class-validator';
 
 export class FindWheatherDto {
   @ApiProperty({
-    example: '2013-01-01T00:00:00.000Z',
+    example: '2013-01-01',
   })
   @Type(() => Date)
   @IsDate()
