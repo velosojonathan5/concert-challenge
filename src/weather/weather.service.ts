@@ -4,13 +4,14 @@ import { Device } from 'src/entities/device.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class DevicesService {
+export class WeatherService {
   constructor(
     @InjectRepository(Device)
     private deviceRepository: Repository<Device>,
   ) {}
 
-  async findDeviceData(date: Date) {
-    return this.deviceRepository.find();
+  async findWeather(measurementDate: Date) {
+    const queryDate = measurementDate.toISOString().split('T')[0];
+    return this.deviceRepository.findOne({ where: { date: queryDate } });
   }
 }
